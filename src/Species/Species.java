@@ -1,22 +1,27 @@
 package Species;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-public abstract class Species {
+public abstract class Species implements Iloggable{
 
     // member variables
     private String name;
     private String gender;
     private String coordinates;
-    private int weight;
+    private double weight;
 
     // Empty Constructor
     public Species(){}
 
     // Constructor
-    public Species(String name, String gender, String coordinates, int weidhgt){
+    public Species(String name, String gender, String coordinates, double weight){
         this.name=name;
         this.gender=gender;
         this.coordinates=coordinates;
-        this.weight=weidhgt;
+        this.weight=weight;
     }
 
     // Getters
@@ -32,7 +37,7 @@ public abstract class Species {
         return coordinates;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
@@ -50,14 +55,46 @@ public abstract class Species {
         this.coordinates = coordinates;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
     // toString method
     @Override
     public String toString(){
-        return getName() + " " + getGender() + " " + getWeight();
+
+        return String.format("""
+                Species: %s
+                Gender: %s
+                Weight: %s
+                """, getName(), getGender(), getWeight());
     }
 
+    public void createFile(){
+        try{
+            FileWriter fileWriter = new FileWriter("./outputFile.txt",true);
+            fileWriter.append(toString());
+            //fileWriter.append(getCoordinates()).append("\n");
+            fileWriter.append("--------------------------------------\n");
+            fileWriter.append("\n");
+            fileWriter.close();
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+    // Create Method to read file
+    public static String readFile(String fileName){
+        try{
+            Path filePath = Paths.get("./" + fileName);
+
+            return new String (Files.readAllBytes(filePath));
+        } catch(Exception ex){
+            return "There is an error";
+        }
+    }
 }
+
+

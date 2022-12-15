@@ -1,6 +1,6 @@
 package Species;
 
-public class Penguin extends Species{
+public class Penguin extends Species implements Iloggable{
 
     private double bloodPressure;
 
@@ -8,7 +8,7 @@ public class Penguin extends Species{
     public Penguin(){}
 
     // Constructor
-    public Penguin(String name, String gender, String coordinates, int weight, double bloodP){
+    public Penguin(String name, String gender, String coordinates, double weight, double bloodP){
         super(name, gender, coordinates, weight);
         this.bloodPressure=bloodP;
     }
@@ -28,6 +28,13 @@ public class Penguin extends Species{
     // toString method
     @Override
     public String toString(){
-        return getName() + " " + getGender() + " " + getWeight() + " " + getCoordinates() + " " + getBloodPressure();
+
+        return String.format("""
+                Species: %s
+                Gender: %s
+                Weight: %s
+                Coordinates: %s
+                BloodPressure: %s
+                """, getName(), getGender(), getWeight(), getCoordinates(), getBloodPressure());
     }
 }

@@ -1,6 +1,6 @@
 package Species;
 
-public class Sealion extends Species{
+public class Sealion extends Species implements Iloggable{
 
     private int numOfSpots;
 
@@ -8,7 +8,7 @@ public class Sealion extends Species{
     public Sealion(){}
 
     // Constructor
-    public Sealion(String name, String gender, String coordinates, int weight, int spots){
+    public Sealion(String name, String gender, String coordinates, double weight, int spots){
         super(name,gender,coordinates,weight);
         this.numOfSpots=spots;
     }
@@ -26,6 +26,13 @@ public class Sealion extends Species{
     // toString method
     @Override
     public String toString(){
-        return getName() + " " + getGender() + " " + getWeight() + " " + getCoordinates() + " " + getNumOfSpots();
+
+        return String.format("""
+                Species: %s
+                Gender: %s
+                Weight: %s
+                Coordinates: %s
+                Spots: %s
+                """, getName(), getGender(), getWeight(), getCoordinates(), getNumOfSpots());
     }
 }

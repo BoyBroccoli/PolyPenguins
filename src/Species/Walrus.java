@@ -1,6 +1,6 @@
 package Species;
 
-public class Walrus extends Species{
+public class Walrus extends Species implements Iloggable{
 
     // member variables
     private String dentalHealth;
@@ -9,7 +9,7 @@ public class Walrus extends Species{
     public Walrus(){}
 
     // Constructor
-    public Walrus(String name, String gender, String coordinates, int weight, String dentalH){
+    public Walrus(String name, String gender, String coordinates, double weight, String dentalH){
 
         super(name,gender,coordinates,weight);
 
@@ -29,6 +29,14 @@ public class Walrus extends Species{
     // toString method
     @Override
     public String toString(){
-        return getName() + " " + getGender() + " " + getWeight() + " " + getCoordinates() + " " + getDentalHealth();
+
+        return String.format("""
+                Species: %s
+                Gender: %s
+                Weight: %s
+                Coordinates: %s
+                DentalHealth: %s
+                """, getName(), getGender(), getWeight(), getCoordinates(), getDentalHealth());
     }
+
 }
